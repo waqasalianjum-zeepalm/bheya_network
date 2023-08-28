@@ -1,0 +1,51 @@
+package com.example.bheya_network.core.model.cell
+
+import android.os.Build
+import com.example.bheya_network.core.model.Network
+import com.example.bheya_network.core.model.annotation.SinceSdk
+import com.example.bheya_network.core.model.band.IBand
+import com.example.bheya_network.core.model.connection.IConnection
+import com.example.bheya_network.core.model.signal.ISignal
+
+interface ICell {
+
+    /**
+     * Subscription id into which cell is bound to, [Int.MAX_VALUE] if
+     * subscriptions are not supported yet
+     */
+    @SinceSdk(Build.VERSION_CODES.N)
+    val subscriptionId: Int
+
+    /**
+     * Current state of connection to cell - connected and serving or neighbouring.
+     */
+    val connectionStatus: IConnection
+
+    /**
+     * Band of cell containing downlink & uplink frequencies (if applicable)
+     */
+    @SinceSdk(Build.VERSION_CODES.N)
+    val band: IBand?
+
+    /**
+     * Signal of this cell
+     */
+    val signal: ISignal?
+
+    /**
+     * PLMN of current network, in case of CDMA is can be guessed from other serving cells.
+     * Generally null for non-serving cells if no postprocessing is done.
+     */
+    val network: Network?
+
+    /**
+     * Using visitor pattern invokes one method of [processor]
+     * with proper [ICell] instance.
+     *
+     * Use this to map NetMonster's instances into yours.
+     *
+     * @param processor class that manages transformation from this object to another
+     */
+    fun <T> let(processor: ICellProcessor<T>) : T
+
+}

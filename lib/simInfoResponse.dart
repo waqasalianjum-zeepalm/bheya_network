@@ -1,0 +1,59 @@
+
+// ignore_for_file: file_names
+
+    class SIMInfoResponse {
+      List<SimInfoList>? simInfoList;
+    
+      SIMInfoResponse({this.simInfoList});
+    
+      SIMInfoResponse.fromJson(Map<String, dynamic> json) {
+        if (json['simInfoList'] != null) {
+          simInfoList = [];
+          json['simInfoList'].forEach((v) {
+            simInfoList!.add(SimInfoList.fromJson(v));
+          });
+        }
+      }
+    
+      Map<String, dynamic> toJson() {
+        final Map<String, dynamic> data = <String, dynamic>{};
+        // ignore: unnecessary_this
+        if (this.simInfoList != null) {
+          data['simInfoList'] = simInfoList!.map((v) => v.toJson()).toList();
+        }
+        return data;
+      }
+    }
+    
+    class SimInfoList {
+      String? carrierName;
+      String? displayName;
+      int? mcc;
+      int? mnc;
+      String? subscriptionInfoNumber;
+    
+      SimInfoList(
+          {this.carrierName,
+          this.displayName,
+          this.mcc,
+          this.mnc,
+          this.subscriptionInfoNumber});
+    
+      SimInfoList.fromJson(Map<String, dynamic> json) {
+        carrierName = json['carrierName'];
+        displayName = json['displayName'];
+        mcc = json['mcc'];
+        mnc = json['mnc'];
+        subscriptionInfoNumber = json['subscriptionInfoNumber'];
+      }
+    
+      Map<String, dynamic> toJson() {
+        final Map<String, dynamic> data = <String, dynamic>{};
+        data['carrierName'] = carrierName;
+        data['displayName'] = displayName;
+        data['mcc'] = mcc;
+        data['mnc'] = mnc;
+        data['subscriptionInfoNumber'] = subscriptionInfoNumber;
+        return data;
+      }
+    }
