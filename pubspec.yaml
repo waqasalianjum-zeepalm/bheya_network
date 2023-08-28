@@ -1,7 +1,7 @@
 name: bheya_network
-description: A new Flutter plugin project.
+description: Henibe Network is a mobile application that provides detailed network information cellular. It is designed for users who wish to analyze the quality of their mobile signal, perform signal measurements and obtain accurate cellular connectivity information in their environment.
 version: 0.0.1
-homepage:
+homepage: https://github.com/saliemmanuel/bheya_network
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
